@@ -4,6 +4,8 @@ plugins {
     id("com.android.library")
 }
 
+apply(from = "../ktlint.gradle")
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     targetHierarchy.default()
@@ -35,6 +37,8 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
                 implementation("com.squareup.okio:okio:3.5.0")
+                implementation("io.matthewnelson.encoding:base32:2.0.0")
+
                 val cryptoVersion = "0.3.0"
                 // HmacMD5
                 implementation("org.kotlincrypto.macs:hmac-md:${cryptoVersion}")
