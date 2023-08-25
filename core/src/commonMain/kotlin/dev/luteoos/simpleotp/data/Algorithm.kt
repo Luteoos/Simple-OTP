@@ -1,4 +1,4 @@
-package dev.luteoos.simpleotp
+package dev.luteoos.simpleotp.data
 
 import org.kotlincrypto.core.mac.Mac
 

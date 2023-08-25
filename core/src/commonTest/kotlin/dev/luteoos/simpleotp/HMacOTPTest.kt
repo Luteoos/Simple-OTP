@@ -1,5 +1,6 @@
 package dev.luteoos.simpleotp
 
+import dev.luteoos.simpleotp.data.KeyEncoding
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.test.Test
 import kotlin.test.assertTrue

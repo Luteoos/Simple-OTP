@@ -2,6 +2,8 @@
 
 package dev.luteoos.simpleotp
 
+import dev.luteoos.simpleotp.data.Algorithm
+import dev.luteoos.simpleotp.data.KeyEncoding
 import io.matthewnelson.encoding.base32.Base32Default
 import io.matthewnelson.encoding.core.Decoder.Companion.decodeToByteArray
 import okio.Buffer
