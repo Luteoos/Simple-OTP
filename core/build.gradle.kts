@@ -1,8 +1,28 @@
 plugins {
+    id("maven-publish")
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
 }
+
+/**
+ * Parameters taken from gradle.properties
+ *
+ * Before running `gradlew publishToMavenLocal` verify gradle.properties
+ */
+val VERSION_NAME: String by project
+val GROUP: String by project
+val ARTIFACT_ID: String by project
+val isRelease: String by project
+
+group = GROUP
+version = "$VERSION_NAME${
+    if(isRelease.toBoolean())
+        ""
+    else
+        "-SNAPSHOT"
+}"
+logger.info("qrx version=${project.version} group=${project.group} artifactId=$ARTIFACT_ID")
 
 apply(from = "../ktlint.gradle")
 
@@ -16,6 +36,8 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+
+        publishLibraryVariants("release")
     }
     iosX64()
     iosArm64()
@@ -69,5 +91,35 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 25
+    }
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = GROUP
+            artifactId = ARTIFACT_ID
+
+            afterEvaluate {
+                from(components["release"])
+            }
+            pom {
+                name.set(ARTIFACT_ID)
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("http://www.opensource.org/licenses/mit-license.php")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("Luteoos")
+                        name.set("Mateusz Lutecki")
+                        email.set("mateusz.lutecki.it@gmail.com")
+                        url.set("http://luteoos.dev")
+                    }
+                }
+            }
+        }
     }
 }
