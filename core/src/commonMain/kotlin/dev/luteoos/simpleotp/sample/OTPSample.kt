@@ -15,7 +15,7 @@ class OTPSample {
 
         val generator = HMacOTP(key)
         val otp = generator.generateOneTimePassword(counter)
-        generator.isValid(otp.toString(), 21)
+        generator.isValid(otp.toString(), counter)
     }
 
     fun getHOTPSHA256FromByteArray() {
@@ -24,24 +24,22 @@ class OTPSample {
 
         val generator = HMacOTP(algorithm = Algorithm.HmacSHA256(key))
         val otp = generator.generateOneTimePassword(counter)
-        generator.isValid(otp.toString(), 21)
+        generator.isValid(otp.toString(), counter)
     }
 
     fun getHOTPFromBase32String() {
-        val key = byteArrayOf(0x00, 0x01, 0x03)
-        val secret = ""
+        val secret = "QWERTYZ"
         val counter = 69L
 
         val generator = HMacOTP(HMacOTP.encodeKey(secret, encoding = KeyEncoding.BASE32))
         val otp = generator.generateOneTimePassword(counter)
-        generator.isValid(otp.toString(), 21)
+        generator.isValid(otp.toString(), counter)
     }
 
     fun getTOTPFromByteArray() {
         val key = byteArrayOf(0x00, 0x01, 0x03)
-        val counter = 69L
-
         val timeInstant = Clock.System.now()
+
         val generator = TimeOTP(key)
         val otp = generator.generateTimedOneTimePassword(time = timeInstant)
         generator.isValid(otp.toString(), timeInstant)
@@ -57,18 +55,15 @@ class OTPSample {
     }
 
     fun getTOTPFromBase32String() {
-        val key = byteArrayOf(0x00, 0x01, 0x03)
-        val secret = ""
+        val secret = "QWERTYZ"
         val epochMillis = 69L
-
         val generator = TimeOTP(TimeOTP.encodeKey(secret, encoding = KeyEncoding.BASE32))
         val otp = generator.generateTimedOneTimePassword(epochMillis)
         generator.isValid(otp.toString(), Clock.System.now())
     }
 
     fun getTOTPFromRawString() {
-        val key = byteArrayOf(0x00, 0x01, 0x03)
-        val secret = ""
+        val secret = "QWERTYZ"
         val epochMillis = 69L
 
         val generator = TimeOTP(

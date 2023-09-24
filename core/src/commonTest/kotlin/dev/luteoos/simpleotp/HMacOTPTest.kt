@@ -16,16 +16,12 @@ class HMacOTPTest {
             )
         )
         val otp = generator.generateOneTimePassword(1)
-        assertTrue { 754029 == otp } // 754029 result matching BWC implementation
+        assertTrue { 754029 == otp } // 754029 result matching other implementation
     }
 
     @OptIn(ExperimentalEncodingApi::class)
     @Test
     fun test_string_HMAC() {
-        val keyString = byteArrayOf(
-            0x6A, 0x4A, 0x38, 0x2F, 0x87.toByte(), 0x1D,
-            0xE5.toByte(), 0x56, 0xC2.toByte(), 0x4B
-        ).toString()
         val generator = HMacOTP("test")
         val otp = generator.generateOneTimePassword(1)
         assertTrue { 431881 == otp } // 431881 for utf8 encoded
