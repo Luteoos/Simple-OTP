@@ -22,7 +22,7 @@ version = "$VERSION_NAME${
     else
         "-SNAPSHOT"
 }"
-logger.info("qrx version=${project.version} group=${project.group} artifactId=$ARTIFACT_ID")
+logger.info("Simple-OTP version=${project.version} group=${project.group} artifactId=$ARTIFACT_ID")
 
 apply(from = "../ktlint.gradle")
 
