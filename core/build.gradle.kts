@@ -30,21 +30,34 @@ apply(from = "../ktlint.gradle")
 kotlin {
     targetHierarchy.default()
 
+
     android {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
             }
         }
-
         publishLibraryVariants("release")
     }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
 
+//    val publicationsFromMainHost =
+//        listOf(jvm()).map { it.name } + "kotlinMultiplatform"
+//    publishing {
+//        publications {
+//            matching { it.name in publicationsFromMainHost }.all {
+//                val targetPublication = this@all
+//                tasks.withType<AbstractPublishToMaven>()
+//                    .matching { it.publication == targetPublication }
+//                    .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
+//            }
+//        }
+//    }
+
     cocoapods {
-        summary = "Simple KMP OTP library"
+        summary = "Simple-OTP KMP library"
         homepage = "https://luteoos.dev"
         version = "1.0"
         ios.deploymentTarget = "14.1"
@@ -119,6 +132,21 @@ publishing {
                         url.set("http://luteoos.dev")
                     }
                 }
+            }
+        }
+    }
+}
+
+// Workaround for https://youtrack.jetbrains.com/issue/KT-51970
+afterEvaluate {
+    afterEvaluate {
+        tasks.configureEach {
+            if (
+                name.startsWith("compile")
+                && name.endsWith("KotlinMetadata")
+            ) {
+                println("disabling ${this}:$name")
+                enabled = false
             }
         }
     }

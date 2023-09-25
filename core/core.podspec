@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
     spec.source                   = { :http=> ''}
     spec.authors                  = 'Mateusz Lutecki'
     spec.license                  = ''
-    spec.summary                  = 'Simple KMP OTP library'
+    spec.summary                  = 'Simple-OTP KMP library'
     spec.vendored_frameworks      = 'build/cocoapods/framework/simple-otp.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
