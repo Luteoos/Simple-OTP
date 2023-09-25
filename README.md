@@ -1,6 +1,11 @@
 # Simple-OTP
 Kotlin Multiplatform library for OTP and TOTP password generation/validation
 
+[![](https://jitpack.io/v/Luteoos/Simple-otp.svg)](https://jitpack.io/#Luteoos/Simple-otp)
+[![GitHub tag](https://img.shields.io/github/tag/Luteoos/Simple-OTP?include_prereleases=&sort=semver&color=blue)](https://github.com/Luteoos/Simple-OTP/releases/)
+[![License](https://img.shields.io/badge/License-MIT-blue)](#license)
+[![Status - Experimental](https://img.shields.io/badge/Status-Experimental-FFFF00)](https://)
+
 ## Dependencies
 - [MACs](https://github.com/KotlinCrypto/MACs)
 - [KotlinX-DateTime](https://github.com/Kotlin/kotlinx-datetime)
