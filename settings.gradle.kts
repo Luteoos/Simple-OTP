@@ -14,4 +14,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Simple-OTP"
-include(":core")
+include(":simple-otp")
