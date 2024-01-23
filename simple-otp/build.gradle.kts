@@ -10,10 +10,10 @@ plugins {
  *
  * Before running `gradlew publishToMavenLocal` verify gradle.properties
  */
-val VERSION_NAME: String by project
-val GROUP: String by project
-val ARTIFACT_ID: String by project
-val isRelease: String by project
+val VERSION_NAME: String = project.findProperty("VERSION_NAME")?.toString() ?: "1.0.0"
+val GROUP: String = project.findProperty("GROUP")?.toString() ?: "dev.luteoos"
+val ARTIFACT_ID: String = project.findProperty("ARTIFACT_ID")?.toString() ?: "Simple-OTP"
+val isRelease: String = project.findProperty("isRelease")?.toString() ?: "true"
 
 group = GROUP
 version = "$VERSION_NAME${
@@ -42,6 +42,11 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+
+    jvm()
+    watchos()
+    macosArm64()
+    macosX64()
 
 //    val publicationsFromMainHost =
 //        listOf(jvm()).map { it.name } + "kotlinMultiplatform"
@@ -118,6 +123,7 @@ publishing {
             }
             pom {
                 name.set(ARTIFACT_ID)
+                description.set("Simple OTP for Kotlin Multiplatform")
                 licenses {
                     license {
                         name.set("MIT License")
