@@ -44,7 +44,7 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-
+//    ios()
     jvm()
     watchos()
     macosArm64()
@@ -78,7 +78,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-                implementation("com.squareup.okio:okio:3.5.0")
+                implementation("com.squareup.okio:okio:3.7.0")
                 implementation("io.matthewnelson.encoding:base32:2.0.0")
 
                 val cryptoVersion = "0.3.0"

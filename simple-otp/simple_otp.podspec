@@ -6,14 +6,25 @@ Pod::Spec.new do |spec|
     spec.authors                  = 'Mateusz Lutecki'
     spec.license                  = ''
     spec.summary                  = 'Simple-OTP KMP library'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/simple-otp.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/simple_otp.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
                 
+    if !Dir.exist?('build/cocoapods/framework/simple_otp.framework') || Dir.empty?('build/cocoapods/framework/simple_otp.framework')
+        raise "
+
+        Kotlin framework 'simple_otp' doesn't exist yet, so a proper Xcode project can't be generated.
+        'pod install' should be executed after running ':generateDummyFramework' Gradle task:
+
+            ./gradlew :simple-otp:generateDummyFramework
+
+        Alternatively, proper pod installation is performed during Gradle sync in the IDE (if Podfile location is set)"
+    end
+                
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':simple-otp',
-        'PRODUCT_MODULE_NAME' => 'simple-otp',
+        'PRODUCT_MODULE_NAME' => 'simple_otp',
     }
                 
     spec.script_phases = [
