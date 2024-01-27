@@ -10,19 +10,21 @@ plugins {
  *
  * Before running `gradlew publishToMavenLocal` verify gradle.properties
  */
-val VERSION_NAME: String = project.findProperty("VERSION_NAME")?.toString() ?: "1.0.0"
-val GROUP: String = project.findProperty("GROUP")?.toString() ?: "dev.luteoos"
-val ARTIFACT_ID: String = project.findProperty("ARTIFACT_ID")?.toString() ?: "Simple-OTP"
-val isRelease: String = project.findProperty("isRelease")?.toString() ?: "true"
+val VERSION: String by project
+val GROUP: String by project
+val ARTIFACT: String by project
+val JITPACK: String by project
+val isRelease: String by project
 
 group = GROUP
-version = "$VERSION_NAME${
+version = "$VERSION${
     if(isRelease.toBoolean())
         ""
     else
         "-SNAPSHOT"
 }"
-logger.info("Simple-OTP version=${project.version} group=${project.group} artifactId=$ARTIFACT_ID")
+
+logger.info("Simple-OTP group=$GROUP artifactId=$ARTIFACT version=${project.version} buildOnJitpack=$JITPACK")
 
 apply(from = "../ktlint.gradle")
 
@@ -116,13 +118,13 @@ publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = GROUP
-            artifactId = ARTIFACT_ID
+            artifactId = ARTIFACT
 
             afterEvaluate {
                 from(components["release"])
             }
             pom {
-                name.set(ARTIFACT_ID)
+                name.set(ARTIFACT)
                 description.set("Simple OTP for Kotlin Multiplatform")
                 licenses {
                     license {
